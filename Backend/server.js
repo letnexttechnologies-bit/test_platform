@@ -27,28 +27,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Configure allowed frontends via env:
-// - FRONTEND_URL  => single origin (recommended in production, e.g. https://your-frontend.onrender.com)
-// - FRONTEND_URLS => comma-separated origins (optional)
-const defaultFrontend = "http://localhost:5173";
-const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || defaultFrontend)
-  .split(",")
-  .map((s) => s.trim())
-  .filter(Boolean);
+// -------------------- CORS FIX --------------------
+const allowedOrigins = [
+  "http://localhost:5173",            // local dev
+  "https://learnnexttest.netlify.app" // production frontend
+];
 
-// app.use(
-//   cors({
-//     origin: (origin, callback) => {
-//       // allow requests with no origin (e.g. curl, mobile clients)
-//       if (!origin) return callback(null, true);
-//       if (allowedOrigins.includes(origin)) return callback(null, true);
-//       return callback(new Error("CORS policy: Origin not allowed"), false);
-//     },
-//     credentials: true,
-//   })
-// );
-
-app.use(cors());
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow Postman/cURL (no origin) or valid frontend origins
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("CORS policy: Origin not allowed"), false);
+    },
+    credentials: true, // ✅ allow cookies/authorization headers
+  })
+);
+// --------------------------------------------------
 
 // Routes
 app.use("/api/v1/users", authRoutes);
