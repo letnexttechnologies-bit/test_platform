@@ -1,0 +1,166 @@
+/* Container and Card */
+.test-details-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #f4f6f8;
+  font-family: Arial, sans-serif;
+    margin-left: -250px;
+
+}
+
+.test-details-card {
+  max-width: 800px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Header */
+.test-details-header h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.test-details-header h3 {
+  font-size: 16px;
+  color: #7f8c8d;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.test-details-header .description {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Sections */
+.section-block {
+  margin-bottom: 30px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 25px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-title .icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #3498db;
+}
+
+.section-title h2 {
+  font-size: 20px;
+  color: #34495e;
+  font-weight: bold;
+}
+
+/* Details Grid */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.detail-label {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #333;
+}
+
+/* Lists */
+.instruction-list, .requirement-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.instruction-list li, .requirement-list li {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.instruction-list li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.instruction-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #3498db;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.requirement-list li {
+  display: flex;
+  align-items: center;
+}
+
+.check-icon {
+  color: #2ecc71;
+  font-weight: bold;
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Footer and Buttons */
+.test-details-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 25px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 30px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #3498db;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+.back-btn:hover {
+  color: #2980b9;
+}
+
+.start-btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.start-btn:hover {
+  background: #2980b9;
+}

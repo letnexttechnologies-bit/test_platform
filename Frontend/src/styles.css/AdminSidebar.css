@@ -1,0 +1,61 @@
+/* AdminSidebar.css */
+.admin-sidebar {
+  width: 250px;
+  background-color: #2d3748;
+  color: white;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 20px 0;
+}
+
+.logo {
+  padding: 0 20px 20px;
+  font-size: 18px;
+  font-weight: 700;
+  border-bottom: 1px solid #4a5568;
+  margin-bottom: 20px;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar li {
+  margin-bottom: 4px;
+}
+
+.admin-sidebar a {
+  display: block;
+  padding: 12px 20px;
+  color: #cbd5e0;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.admin-sidebar a:hover {
+  background-color: #4a5568;
+  color: white;
+}
+
+.admin-sidebar a.active {
+  background-color: #4299e1;
+  color: white;
+}
+.logout-btn
+{
+
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 120%;
+    
+  padding: 12px 20px;
+  background-color: #4a5568;
+  color: white;
+    text-decoration: none;
+  transition: background-color 0.2s;
+}

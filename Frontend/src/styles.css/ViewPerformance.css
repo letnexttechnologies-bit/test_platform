@@ -1,0 +1,43 @@
+.performance-container {
+  max-width: 800px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.performance-card {
+  background: #f9f9f9;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.program-card {
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.back-btn {
+  margin-bottom: 15px;
+  padding: 6px 12px;
+  border: none;
+  background: #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #ccc;
+}
+
+.center-text {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.error-text {
+  color: red;
+}

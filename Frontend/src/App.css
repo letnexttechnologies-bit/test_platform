@@ -1,0 +1,45 @@
+.app {
+  display: flex;
+  height: 100vh;
+}
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* App.css */
+.app {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  /* color: #2d3748; */
+}
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 250px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .question-bank-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .performance-stats {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  .stat {
+    min-width: 120px;
+  }
+}

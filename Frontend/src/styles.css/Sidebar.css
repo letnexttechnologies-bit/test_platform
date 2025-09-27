@@ -1,0 +1,116 @@
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #2d3748;
+  color: white;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 20px 0;
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  margin-left: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 4px;
+}
+
+.sidebar li:hover,
+.sidebar li.active {
+  background: #2563eb;
+  color: black;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 12px 20px;
+  color: #cbd5e0;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.sidebar ul li a.active {
+  background-color: #e5e7eb; /* highlight active */
+  font-weight: bold;
+  color: #000;
+}
+
+/* Main content wrapper */
+.main-content {
+  margin-left: 250px; /* Push content to the right of sidebar */
+  padding: 20px;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+}
+
+/* Available Tests Page */
+.available-tests {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.test-grid {
+  display: grid; /* Use grid for proper alignment */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.test-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.test-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.test-card h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.test-card p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.start-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.start-btn:hover {
+  background: #1e40af;
+}

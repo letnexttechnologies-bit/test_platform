@@ -1,0 +1,281 @@
+/* QuestionBank.css */
+
+/* --- Main Container --- */
+.question-bank {
+  padding: 20px;
+  background-color: #f5f7f9;
+  min-height: 100vh;
+  margin-left: 250px; /* sidebar width */
+  font-family: 'Inter', sans-serif;
+  color: #2d3748;
+  transition: margin-left 0.3s ease;
+}
+
+.question-bank h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* --- Tabs Switch --- */
+.switch-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.switch-buttons button {
+  padding: 8px 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #e2e8f0;
+  color: #2d3748;
+  transition: all 0.2s ease;
+}
+
+.switch-buttons button.active {
+  background-color: #3182ce;
+  color: white;
+}
+
+.switch-buttons button:hover:not(.active) {
+  background-color: #cbd5e0;
+}
+
+/* --- Top Buttons --- */
+.top-buttons {
+  margin-bottom: 20px;
+}
+
+.top-buttons .btn-primary {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 10px;
+}
+
+.top-buttons .btn-primary:hover {
+  background-color: #2c5282;
+}
+
+/* --- Edit Form --- */
+.edit-form {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.edit-form h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.edit-form .form-group {
+  margin-bottom: 18px;
+}
+
+.edit-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.edit-form input[type="text"],
+.edit-form textarea,
+.edit-form select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.2s ease;
+}
+
+.edit-form input[type="text"]:focus,
+.edit-form textarea:focus,
+.edit-form select:focus {
+  border-color: #3182ce;
+  outline: none;
+}
+
+/* --- Form Buttons --- */
+.edit-form .form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.edit-form .form-actions button {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.edit-form .form-actions button.btn-primary {
+  background-color: #3182ce;
+  color: white;
+}
+
+.edit-form .form-actions button.btn-primary:hover {
+  background-color: #2c5282;
+}
+
+.edit-form .form-actions button.btn-secondary {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+.edit-form .form-actions button.btn-secondary:hover {
+  background-color: #cbd5e0;
+}
+
+/* --- Questions Table --- */
+.questions-table-wrapper {
+  overflow-x: auto;
+}
+
+.questions-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.questions-table th,
+.questions-table td {
+  padding: 14px 12px;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.questions-table th {
+  background: #f5f5f5;
+  color: #555;
+  font-weight: 600;
+}
+
+.questions-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.questions-table tr:hover {
+  background: #e6f7ff;
+}
+
+/* --- Action Buttons --- */
+.questions-table button {
+  margin-right: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.questions-table .btn-edit {
+  background: #17a2b8;
+  color: #fff;
+}
+
+.questions-table .btn-edit:hover {
+  background: #138496;
+}
+
+.questions-table .btn-delete {
+  background: #dc3545;
+  color: #fff;
+}
+
+.questions-table .btn-delete:hover {
+  background: #c82333;
+}
+
+/* --- Test Case Groups --- */
+.test-case-group {
+  margin-bottom: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+}
+
+.test-case-group textarea {
+  margin-bottom: 6px;
+}
+
+.btn-add-testcase,
+.btn-remove-testcase {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-add-testcase {
+  background-color: #3182ce;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.btn-add-testcase:hover {
+  background-color: #2c5282;
+}
+
+.btn-remove-testcase {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-remove-testcase:hover {
+  background-color: #c82333;
+}
+
+/* Loading text */
+.loading-text {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  padding: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .question-bank {
+    margin-left: 0;
+    padding: 15px;
+  }
+  .questions-table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 640px) {
+  .switch-buttons {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .switch-buttons button {
+    width: 100%;
+  }
+  .questions-table {
+    min-width: 400px;
+  }
+}

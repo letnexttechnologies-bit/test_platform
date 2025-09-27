@@ -1,0 +1,75 @@
+.results-table{
+     padding: 20px;
+  background-color: #f5f7f9;
+  min-height: 100vh;
+  margin-left: 250px;
+}
+/* Center container for search and buttons */
+.center-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Search input */
+.center-input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  flex: 1;
+  min-width: 200px;
+}
+
+.center-input:focus {
+  border-color: #007bff;
+}
+
+/* Common button styles */
+.center-container button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Export button */
+.btn-export {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+
+.btn-export:hover {
+  background-color: #218838;
+}
+
+/* Delete All button */
+.btn-delete-all {
+  background-color: #dc3545; /* Red */
+  color: white;
+}
+
+.btn-delete-all:hover {
+  background-color: #c82333;
+}
+
+/* Action buttons inside table */
+.action-buttons button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.btn-view {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-view:hover {
+  background-color: #0069d9;
+}
