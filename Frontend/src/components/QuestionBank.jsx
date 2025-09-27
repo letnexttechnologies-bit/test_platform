@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../styles.css/QuestionBank.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function QuestionBank() {
   const [activeTab, setActiveTab] = useState("mcq");
   const [loading, setLoading] = useState(false);
@@ -33,8 +35,8 @@ export default function QuestionBank() {
     setLoading(true);
     try {
       const [mcqRes, programRes] = await Promise.all([
-        fetch("http://localhost:8000/api/v1/questions/alltasks"),
-        fetch("http://localhost:8000/api/v1/programs/all-pro"),
+        fetch(`${BASE_URL}/api/v1/questions/alltasks`),
+        fetch(`${BASE_URL}/api/v1/programs/all-pro`),
       ]);
       const mcqData = await mcqRes.json();
     
@@ -99,7 +101,7 @@ export default function QuestionBank() {
       correctOption: optionMap[mcqForm.correctOption],
     };
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/questions/edit/${editingMCQ}`, {
+      const res = await fetch(`${BASE_URL}/api/v1/questions/edit/${editingMCQ}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -118,7 +120,7 @@ export default function QuestionBank() {
   const deleteMCQ = async (id) => {
     if (!window.confirm("Delete this MCQ?")) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/questions/delete/${id}`, { method: "DELETE" });
+      const res = await fetch(`${BASE_URL}/api/v1/questions/delete/${id}`, { method: "DELETE" });
       const data = await res.json();
       if (data.success) fetchAllQuestions();
     } catch (err) {
@@ -180,7 +182,7 @@ export default function QuestionBank() {
         testcase: validTestCases, // ✅ save as array, not string
       };
 
-      const res = await fetch(`http://localhost:8000/api/v1/programs/edit-pro/${editingProgram}`, {
+      const res = await fetch(`${BASE_URL}/api/v1/programs/edit-pro/${editingProgram}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -205,7 +207,7 @@ export default function QuestionBank() {
   const deleteProgram = async (id) => {
     if (!window.confirm("Delete this Programming question?")) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/programs/delete-pro/${id}`, { method: "DELETE" });
+      const res = await fetch(`${BASE_URL}/api/v1/programs/delete-pro/${id}`, { method: "DELETE" });
       const data = await res.json();
       if (data.success) fetchAllQuestions();
     } catch (err) {

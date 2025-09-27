@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles.css/AddingNewprogramming.css";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default function AddingNewprogramming() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ export default function AddingNewprogramming() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/programs/add-pro", {
+      const res = await fetch(`${BASE_URL}/api/v1/programs/add-pro`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
        body: JSON.stringify({

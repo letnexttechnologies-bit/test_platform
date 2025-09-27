@@ -12,11 +12,13 @@ const StudentResistered = () => {
   const [collegeQuery, setCollegeQuery] = useState("");
   const navigate = useNavigate();
 
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
   // ✅ Fetch all students on mount
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/users/student-count");
+        const response = await fetch(`${BASE_URL}/api/v1/users/student-count`);
         if (!response.ok) throw new Error("Failed to fetch students");
         const data = await response.json();
         const allStudents = data.students || [];
@@ -58,7 +60,7 @@ const StudentResistered = () => {
     if (!window.confirm(`Are you sure you want to delete ${student.fullname}?`)) return;
 
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/users/students/${studentId}`, {
+      const res = await fetch(`${BASE_URL}/api/v1/users/students/${studentId}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -81,7 +83,7 @@ const StudentResistered = () => {
     if (!window.confirm("⚠️ Are you sure you want to delete ALL students?")) return;
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/delete-all", {
+      const res = await fetch(`${BASE_URL}/api/v1/users/delete-all`, {
         method: "DELETE",
       });
       const data = await res.json();

@@ -4,6 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import * as faceapi from "face-api.js"; // ✅ Face detection
 import "../styles.css/ProgrammingTest.css";
 
+
+ const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function ProgrammingTest({ currentUser, setLatestTest }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,7 +58,7 @@ export default function ProgrammingTest({ currentUser, setLatestTest }) {
         if (Array.isArray(location.state?.questions)) {
           setMcqQuestions(location.state.questions);
         } else {
-          const res = await fetch("http://localhost:8000/api/v1/questions/alltasks");
+          const res = await fetch(`${BASE_URL}/api/v1/questions/alltasks`);
           const data = await res.json();
           if (data.success && Array.isArray(data.data)) setMcqQuestions(data.data);
         }
@@ -212,7 +215,7 @@ useEffect(() => {
   const fetchPrograms = async () => {
     setLoadingPrograms(true);
     try {
-      const res = await fetch("http://localhost:8000/api/v1/programs/all-pro");
+      const res = await fetch(`${BASE_URL}/api/v1/programs/all-pro`);
       const data = await res.json();
       if (data.success && Array.isArray(data.data)) {
         setProgramQuestions(data.data);
@@ -265,7 +268,7 @@ useEffect(() => {
       const input = testCases[i]?.input || "";
       const expected = testCases[i]?.output || "";
       try {
-        const res = await fetch("http://localhost:8000/api/v1/execute", {
+        const res = await fetch(`${BASE_URL}/api/v1/execute`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code, language: selectedLang, stdin: input }),
@@ -310,7 +313,7 @@ useEffect(() => {
     try {
       await runCode();
 
-      const res = await fetch("http://localhost:8000/api/v1/test/submit", {
+      const res = await fetch(`${BASE_URL}/api/v1/test/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

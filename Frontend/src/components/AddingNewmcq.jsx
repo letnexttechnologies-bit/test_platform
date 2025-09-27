@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles.css/AddingNewmcq.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function AddingNewmcq() {
   const navigate = useNavigate();
 
@@ -47,7 +49,7 @@ export default function AddingNewmcq() {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/questions/add", {
+      const response = await fetch(`${BASE_URL}/api/v1/questions/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

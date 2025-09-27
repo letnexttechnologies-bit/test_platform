@@ -2,20 +2,19 @@ import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
   try {
-    const token = req.cookies.token;
-    if (!token) return res.status(401).json({ message: "No token found" });
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (decoded.role !== "student") {
-      return res.status(403).json({ message: "Not authorized" });
+    // Read JWT token from cookies
+    const token = req.cookies?.token;
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized - No token" });
     }
 
-    req.user = decoded;
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // { studentId, fullname, role }
     next();
-  } catch (error) {
-    res.status(401).json({ message: "Invalid or expired token" });
+  } catch (err) {
+    return res.status(401).json({ message: "Unauthorized - Invalid token" });
   }
 };
-
 
 export default verifyToken;

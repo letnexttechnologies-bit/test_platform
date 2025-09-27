@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles.css/TestDetails.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function TestDetails({ latestTest }) {
   const [mcqCount, setMcqCount] = useState(0);
   const [programCount, setProgramCount] = useState(0);
@@ -12,7 +14,7 @@ export default function TestDetails({ latestTest }) {
     const fetchData = async () => {
       try {
         // Fetch MCQs
-        const mcqRes = await fetch("http://localhost:8000/api/v1/questions/alltasks");
+        const mcqRes = await fetch(`${BASE_URL}/api/v1/questions/alltasks`);
         const mcqData = await mcqRes.json();
         if (Array.isArray(mcqData.data)) {
           setMcqCount(mcqData.data.length);
@@ -23,7 +25,7 @@ export default function TestDetails({ latestTest }) {
         }
 
         // Fetch Programming Questions
-        const progRes = await fetch("http://localhost:8000/api/v1/programs/all-pro");
+        const progRes = await fetch(`${BASE_URL}/api/v1/programs/all-pro`);
         const progData = await progRes.json();
         if (Array.isArray(progData.data)) {
           setProgramCount(progData.data.length);

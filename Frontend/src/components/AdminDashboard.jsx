@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css/AdminDashboard.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+
 export default function AdminDashboard() {
   const [studentCount, setStudentCount] = useState(0);
   const [collegeCount, setCollegeCount] = useState(0);
@@ -15,7 +18,7 @@ export default function AdminDashboard() {
       try {
         setLoading(true);
 
-        const res = await fetch("http://localhost:8000/api/v1/admin/dashboard-data");
+        const res = await fetch(`${BASE_URL}/api/v1/admin/dashboard-data`);
         if (!res.ok) throw new Error("Failed to fetch dashboard data");
 
         const { students = [], resultMap = {} } = await res.json();

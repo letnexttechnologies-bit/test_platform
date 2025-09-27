@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 import Login from "./pages/Login";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -22,12 +24,11 @@ import StudentPerformance from "./components/StudentPerformance";
 import StudentResistered from "./components/StudentResistered";
 import AddingNewmcq from "./components/AddingNewmcq";
 import AddingNewprogramming from "./components/AddingNewprogramming";
-// import AdminStudentCreate from "./components/AdminStudentCreate";
 
 import "./App.css";
 import ViewPerformace from "./components/ViewPerformace";
 
-// 🟢 Student Layout
+//  Student Layout
 const MainLayout = ({ children, currentUser, latestTest }) => (
   <div className="app">
     <Sidebar student={currentUser} latestTest={latestTest} />
@@ -55,9 +56,9 @@ export default function App() {
   // Fetch logged-in student
   useEffect(() => {
     const fetchStudent = async () => {
+      
       try {
-        const res = await fetch(
-          "http://localhost:8000/api/v1/users/student-dashboard",
+        const res = await fetch(`${BASE_URL}/api/v1/users/student-dashboard`,
           {
             credentials: "include",
           }
@@ -69,7 +70,7 @@ export default function App() {
           // 🟢 Now fetch the latest test for this student
           if (data.student?._id) {
             const testRes = await fetch(
-              `http://localhost:8000/api/v1/test/latest/${data.student._id}`
+              `${BASE_URL}/api/v1/test/latest/${data.student._id}`
             );
             if (testRes.ok) {
               const latest = await testRes.json();

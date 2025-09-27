@@ -4,6 +4,9 @@ import { NavLink } from "react-router-dom";
 import "../styles.css/Sidebar.css";
 import LOGO1 from "../assets/learnNext.jpg"; // ✅ import image
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+
 
 export default function Sidebar({ student, latestTest }) {
   const [latestResult, setLatestResult] = useState(null);
@@ -16,7 +19,7 @@ export default function Sidebar({ student, latestTest }) {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://localhost:8000/api/v1/test/latest/${student._id}`
+          `${BASE_URL}/api/v1/test/latest/${student._id}`
         );
         const data = await res.json();
         if (res.ok && data.success) setLatestResult(data.data);

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles.css/ViewPerformance.css"; // create CSS similar to Results.css
 
+ const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const ViewPerformance = () => {
   const { studentId } = useParams();
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const ViewPerformance = () => {
     const fetchPerformance = async () => {
       try {
         const res = await fetch(
-          `http://localhost:8000/api/v1/test/latest-result/${studentId}`,
+          `${BASE_URL}/api/v1/test/latest-result/${studentId}`,
           { credentials: "include" }
         );
         const data = await res.json();

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles.css/Dashboard.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+
 export default function Dashboard() {
   const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,12 +20,13 @@ export default function Dashboard() {
 
     const fetchStudent = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/v1/users/student-dashboard", {
+        const res = await fetch(`${BASE_URL}/api/v1/users/student-dashboard`, {
           credentials: "include", 
         });
 
         if (res.ok) {
           const data = await res.json();
+          console.log(data)
           setStudent(data.student);
         } else {
           navigate("/"); 

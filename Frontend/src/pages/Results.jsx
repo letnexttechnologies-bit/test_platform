@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "../styles.css/Results.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function Results() {
   const location = useLocation();
   const { testId } = useParams();
@@ -29,7 +31,7 @@ export default function Results() {
         }
 
         // If no result in sessionStorage and student hasn't submitted yet
-        const res = await fetch(`http://localhost:8000/api/v1/test/${testId}`);
+        const res = await fetch(`${BASE_URL}/api/v1/test/${testId}`);
         if (!res.ok) throw new Error("Failed to fetch results");
 
         const data = await res.json();

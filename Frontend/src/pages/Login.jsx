@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles.css/Login.css";
 import LOGO from "../assets/ChatGPT Image Sep 27, 2025, 10_23_41 AM.png"
 
+ const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function Login() {
   const [activeTab, setActiveTab] = useState("student");
 
@@ -29,7 +31,7 @@ export default function Login() {
       }
 
       try {
-        const res = await fetch("http://localhost:8000/api/v1/users/student-login", {
+        const res = await fetch(`${BASE_URL}/api/v1/users/student-login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
