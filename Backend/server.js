@@ -27,35 +27,35 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Configure allowed frontends via env:
-// - FRONTEND_URL  => single origin (recommended in production, e.g. https://your-frontend.onrender.com)
-// - FRONTEND_URLS => comma-separated origins (optional)
-const defaultFrontend = "https://learnnexttest.netlify.app/";
-const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || defaultFrontend)
+// ------------------- CORS Setup -------------------
+const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || "https://learnnexttest.netlify.app")
   .split(",")
-  .map((s) => s.trim())
+  .map(origin => origin.trim().replace(/\/$/, "")) // remove trailing slash
   .filter(Boolean);
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // allow requests with no origin (e.g. curl, mobile clients)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-      return callback(new Error("CORS policy: Origin not allowed"), false);
-    },
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (e.g., curl, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("CORS policy: Origin not allowed"));
+  },
+  credentials: true, // allow cookies
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'], // allowed HTTP methods
+  allowedHeaders: ['Content-Type','Authorization'], // allowed headers
+}));
 
-// Routes
+// Handle preflight OPTIONS requests for all routes
+app.options("*", cors());
+
+// ------------------- Routes -------------------
 app.use("/api/v1/users", authRoutes);
 app.use("/api/v1/questions", addmcqRoutes);
 app.use("/api/v1/programs", addProgrammRoutes);
 app.use("/api/v1/test", testRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
-// ---------------- Local code execution (unchanged) ----------------
+// ------------------- Local code execution -------------------
 const TEMP_DIR = path.join(process.cwd(), "temp_code");
 if (!fs.existsSync(TEMP_DIR)) fs.mkdirSync(TEMP_DIR);
 
@@ -67,9 +67,7 @@ app.post("/api/v1/execute", async (req, res) => {
 
     language = language.toLowerCase();
     const id = uuidv4();
-    let filePath,
-      compileCmd = null,
-      runCmd;
+    let filePath, compileCmd = null, runCmd;
 
     switch (language) {
       case "python3":
