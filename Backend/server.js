@@ -30,7 +30,7 @@ app.use(cookieParser());
 // Configure allowed frontends via env:
 // - FRONTEND_URL  => single origin (recommended in production, e.g. https://your-frontend.onrender.com)
 // - FRONTEND_URLS => comma-separated origins (optional)
-const defaultFrontend = "http://localhost:5173";
+const defaultFrontend = "https://learnnexttest.netlify.app/";
 const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || defaultFrontend)
   .split(",")
   .map((s) => s.trim())
