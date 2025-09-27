@@ -1,3 +1,4 @@
+// server.js
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -18,14 +19,34 @@ dotenv.config();
 
 const app = express();
 
+// Trust proxy so req.secure works behind proxies (Render, Heroku, nginx)
+app.set("trust proxy", 1);
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({
-  origin: "http://localhost:5173",  // or your frontend Render domain
-  credentials: true,
-}));
+
+// Configure allowed frontends via env:
+// - FRONTEND_URL  => single origin (recommended in production, e.g. https://your-frontend.onrender.com)
+// - FRONTEND_URLS => comma-separated origins (optional)
+const defaultFrontend = "http://localhost:5173";
+const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || defaultFrontend)
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow requests with no origin (e.g. curl, mobile clients)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("CORS policy: Origin not allowed"), false);
+    },
+    credentials: true,
+  })
+);
 
 // Routes
 app.use("/api/v1/users", authRoutes);
@@ -34,18 +55,21 @@ app.use("/api/v1/programs", addProgrammRoutes);
 app.use("/api/v1/test", testRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
-// ---------------- Local code execution ----------------
+// ---------------- Local code execution (unchanged) ----------------
 const TEMP_DIR = path.join(process.cwd(), "temp_code");
 if (!fs.existsSync(TEMP_DIR)) fs.mkdirSync(TEMP_DIR);
 
 app.post("/api/v1/execute", async (req, res) => {
   try {
     let { code, language, stdin } = req.body;
-    if (!code || !language) return res.status(400).json({ success: false, error: "Code and language required" });
+    if (!code || !language)
+      return res.status(400).json({ success: false, error: "Code and language required" });
 
     language = language.toLowerCase();
     const id = uuidv4();
-    let filePath, compileCmd = null, runCmd;
+    let filePath,
+      compileCmd = null,
+      runCmd;
 
     switch (language) {
       case "python3":
@@ -114,11 +138,11 @@ app.post("/api/v1/execute", async (req, res) => {
         execute();
       });
     } else execute();
-
   } catch (error) {
     res.json({ success: false, error: error.message });
   }
 });
+// ------------------------------------------------------------------
 
 // ---------------- Connect DB and start server ----------------
 connectDb();

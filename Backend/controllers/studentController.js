@@ -41,12 +41,15 @@ export const studentLogin = async (req, res) => {
     );
 
     // Send token in cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-secure: process.env.NODE_ENV === "production" && req.hostname !== "localhost",
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+const isProd = process.env.NODE_ENV === "production";
+
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: isProd,           // true only in production
+  sameSite: isProd ? "none" : "lax", // "none" for cross-site prod, "lax" for localhost
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
+
 
     res.status(200).json({
       message: isNewStudent
