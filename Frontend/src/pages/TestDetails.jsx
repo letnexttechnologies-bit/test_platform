@@ -26,6 +26,7 @@ export default function TestDetails({ latestTest }) {
 
         // Fetch Programming Questions
         const progRes = await fetch(`${BASE_URL}/api/v1/programs/all-pro`);
+        console.log(progRes)
         const progData = await progRes.json();
         if (Array.isArray(progData.data)) {
           setProgramCount(progData.data.length);

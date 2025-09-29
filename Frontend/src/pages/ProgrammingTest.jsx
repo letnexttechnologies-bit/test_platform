@@ -60,6 +60,7 @@ export default function ProgrammingTest({ currentUser, setLatestTest }) {
         } else {
           const res = await fetch(`${BASE_URL}/api/v1/questions/alltasks`);
           const data = await res.json();
+          console.log(data)
           if (data.success && Array.isArray(data.data)) setMcqQuestions(data.data);
         }
       } catch (err) {
@@ -217,6 +218,7 @@ useEffect(() => {
     try {
       const res = await fetch(`${BASE_URL}/api/v1/programs/all-pro`);
       const data = await res.json();
+      console.log("first",data)
       if (data.success && Array.isArray(data.data)) {
         setProgramQuestions(data.data);
         const initialCode = {};
@@ -458,11 +460,33 @@ useEffect(() => {
               if (!currentProgram) return null;
               return (
                 <>
-                  <h2>
-                    Programming {activeProgram + 1} / {programQuestions.length}
-                  </h2>
-                  <p><strong>{currentProgram.title}</strong></p>
-                  <p>{currentProgram.description || "No description"}</p>
+                 <h2>
+  Programming {activeProgram + 1} / {programQuestions.length}
+</h2>
+
+{/* Title */}
+<p><strong>{currentProgram.title || "Untitled Question"}</strong></p>
+
+{/* Description */}
+<p>{currentProgram.description || "No description"}</p>
+
+{/* Testcases */}
+<div className="testcases">
+  <strong>Testcases:</strong>
+  {Array.isArray(currentProgram.testcase) && currentProgram.testcase.length > 0 ? (
+    <ul>
+      {currentProgram.testcase.map((tc, i) => (
+        <li key={i}>
+          <strong>Input:</strong> {tc.input} <br />
+          <strong>Expected Output:</strong> {tc.output}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No testcases available</p>
+  )}
+</div>
+
                   <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}

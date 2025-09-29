@@ -41,3 +41,7 @@
 .error-text {
   color: red;
 }
+@media (max-width: 770px) {
+  .student-performance {
+    margin-left: 70px; /* full width */}
+}

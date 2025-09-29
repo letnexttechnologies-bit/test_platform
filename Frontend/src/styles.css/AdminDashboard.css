@@ -1,21 +1,25 @@
-/* AdminDashboard.css */
+/* ===================== General Dashboard ===================== */
 .admin-dashboard {
   padding: 20px;
   background-color: #f5f7f9;
   min-height: 100vh;
-  margin-left: 250px;
+  margin-left: 250px; /* default expanded sidebar */
+  transition: margin-left 0.3s ease, transform 0.3s ease;
 }
 
-.dashboard-header {
-  margin-bottom: 24px;
+/* Shift dashboard when sidebar is collapsed */
+.admin-sidebar.collapsed ~ .admin-dashboard {
+  margin-left: 70px;
 }
 
+/* Header */
 .dashboard-header h1 {
   font-size: 24px;
   font-weight: 600;
   color: #2d3748;
 }
 
+/* Stats Cards Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -64,6 +68,7 @@
   color: #718096;
 }
 
+/* Dashboard Content */
 .dashboard-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -84,6 +89,7 @@
   margin-bottom: 16px;
 }
 
+/* Table */
 .table-container {
   overflow-x: auto;
 }
@@ -105,6 +111,7 @@ th {
   font-size: 14px;
 }
 
+/* Users */
 .user-info {
   display: flex;
   align-items: center;
@@ -124,6 +131,7 @@ th {
   font-size: 12px;
 }
 
+/* Status */
 .status-badge {
   padding: 4px 8px;
   border-radius: 16px;
@@ -141,6 +149,7 @@ th {
   color: #c53030;
 }
 
+/* Colleges */
 .colleges-list {
   margin-bottom: 16px;
 }
@@ -197,4 +206,61 @@ th {
   color: #4299e1;
   font-weight: 600;
   cursor: pointer;
+}
+
+/* ===================== Dashboard Responsive ===================== */
+
+/* Desktop (full sidebar) */
+
+/* Tablet & Mobile (same expand/collapse style as desktop) */
+@media (max-width: 1024px) {
+  .admin-dashboard {
+    margin-left: 250px; /* expanded sidebar */
+    transition: margin-left 0.3s ease;
+  }
+
+  .admin-sidebar.collapsed ~ .admin-dashboard {
+    margin-left: 70px;
+  }
+
+  /* Stack dashboard content on very small screens (<480px) */
+  @media (max-width: 480px) {
+    .dashboard-content {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .content-card h2 {
+      font-size: 16px;
+    }
+
+    table th, table td {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+
+    .college-info h4 {
+      font-size: 13px;
+    }
+
+    .college-info p {
+      font-size: 11px;
+    }
+    
+  }
+}
+@media (max-width: 768px) {
+  .admin-dashboard {
+    margin-left: 70px; /* expanded sidebar */
+    width: 100vh;
+  }
+  
+  .admin-sidebar.collapsed ~ .admin-dashboard {
+    margin-left: 70px;
+  }
+  
+  
 }

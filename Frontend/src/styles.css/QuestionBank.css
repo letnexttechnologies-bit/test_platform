@@ -10,6 +10,11 @@
   color: #2d3748;
   transition: margin-left 0.3s ease;
 }
+.btn-edit,
+.btn-delete{
+ width: auto;
+  margin: 0;
+}
 
 .question-bank h1 {
   font-size: 28px;
@@ -267,7 +272,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 770px) {
   .switch-buttons {
     flex-direction: column;
     align-items: flex-end;
@@ -275,7 +280,20 @@
   .switch-buttons button {
     width: 100%;
   }
-  .questions-table {
-    min-width: 400px;
+  
+  .questions-table { 
+width: 100%; 
+  min-width: auto;
   }
+  .question-bank {
+    margin-left: 70px;
+    background: none;
+  }
+  
 }
+.btn-edit,
+.btn-delete{
+ width: auto;
+  margin: 0;
+}
+

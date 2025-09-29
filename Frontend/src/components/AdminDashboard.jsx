@@ -1,9 +1,7 @@
-// AdminDashboard.jsx
 import React, { useState, useEffect } from "react";
 import "../styles.css/AdminDashboard.css";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 
 export default function AdminDashboard() {
   const [studentCount, setStudentCount] = useState(0);
@@ -23,73 +21,52 @@ export default function AdminDashboard() {
 
         const { students = [], resultMap = {} } = await res.json();
 
-        // Student & College Counts
         setStudentCount(students.length);
         const uniqueColleges = new Set(students.map((s) => s.collegename));
         setCollegeCount(uniqueColleges.size);
 
-        // ✅ Group students by college
         const collegeMap = students.reduce((acc, student) => {
           if (!acc[student.collegename]) {
-            acc[student.collegename] = {
-              name: student.collegename,
-              candidates: 0,
-              passed: 0,
-            };
+            acc[student.collegename] = { name: student.collegename, candidates: 0, passed: 0 };
           }
-
           acc[student.collegename].candidates += 1;
 
-          // ensure resultMap entry exists
-          if (!resultMap[student._id]) {
-            resultMap[student._id] = { passed: false, score: 0 };
-          }
-
-          if (resultMap[student._id].passed) {
-            acc[student.collegename].passed += 1;
-          }
+          if (!resultMap[student._id]) resultMap[student._id] = { passed: false, score: 0 };
+          if (resultMap[student._id].passed) acc[student.collegename].passed += 1;
 
           return acc;
         }, {});
 
-        const collegesArray = Object.values(collegeMap).map((college) => ({
+        const collegesArray = Object.values(collegeMap).map(college => ({
           ...college,
-          rate:
-            college.candidates > 0
-              ? Math.round((college.passed / college.candidates) * 100) + "%"
-              : "0%",
+          rate: college.candidates ? Math.round((college.passed / college.candidates) * 100) + "%" : "0%",
           initials: college.name.substring(0, 3).toUpperCase(),
         }));
 
         collegesArray.sort((a, b) => {
-          const rateA = parseInt(a.rate.replace("%", ""));
-          const rateB = parseInt(b.rate.replace("%", ""));
-          if (rateB === rateA) return b.candidates - a.candidates;
+          const rateA = parseInt(a.rate.replace("%",""));
+          const rateB = parseInt(b.rate.replace("%",""));
+          if(rateB === rateA) return b.candidates - a.candidates;
           return rateB - rateA;
         });
 
-        setTopColleges(collegesArray.slice(0, 4));
+        setTopColleges(collegesArray.slice(0,4));
 
-        // ✅ Top Students (use fullname instead of name)
         const studentsWithResults = students
-          .filter((s) => s.fullname) // check fullname
-          .map((s) => ({
-            name: s.fullname, // fix here
-            initials: s.fullname
-              .split(" ")
-              .map((n) => n[0])
-              .join("")
-              .substring(0, 2)
-              .toUpperCase(),
+          .filter(s => s.fullname)
+          .map(s => ({
+            name: s.fullname,
+            initials: s.fullname.split(" ").map(n => n[0]).join("").substring(0,2).toUpperCase(),
             collegename: s.collegename,
             ...resultMap[s._id],
           }))
-          .filter((s) => s.score !== undefined)
-          .sort((a, b) => b.score - a.score)
-          .slice(0, 5);
+          .filter(s => s.score !== undefined)
+          .sort((a,b) => b.score - a.score)
+          .slice(0,5);
 
         setTopStudents(studentsWithResults);
-      } catch (err) {
+
+      } catch(err) {
         console.error(err);
         setError("Failed to fetch dashboard data.");
       } finally {
@@ -107,8 +84,8 @@ export default function AdminDashboard() {
     { title: "----", value: "", subtitle: "" },
   ];
 
-  if (loading) return <p>Loading dashboard...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if(loading) return <p>Loading dashboard...</p>;
+  if(error) return <p style={{color: "red"}}>{error}</p>;
 
   return (
     <div className="admin-dashboard">
@@ -118,7 +95,7 @@ export default function AdminDashboard() {
 
       {/* Stats Cards */}
       <div className="stats-grid">
-        {stats.map((stat, index) => (
+        {stats.map((stat,index)=>(
           <div key={index} className="stat-card">
             <h3>{stat.title}</h3>
             <div className="stat-value">{stat.value ?? "N/A"}</div>
@@ -130,7 +107,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="dashboard-content">
-        {/* Top Performing Students */}
+        {/* Top Students */}
         <div className="content-card">
           <h2>Top Performing Students</h2>
           <div className="table-container">
@@ -138,14 +115,13 @@ export default function AdminDashboard() {
               <thead>
                 <tr>
                   <th>Name</th>
-                 
                   <th>Score</th>
                   <th>Date</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                {topStudents.map((student, idx) => (
+                {topStudents.map((student, idx)=>(
                   <tr key={idx}>
                     <td>
                       <div className="user-info">
@@ -156,12 +132,8 @@ export default function AdminDashboard() {
                     <td>{student.score}%</td>
                     <td>{student.date}</td>
                     <td>
-                      <span
-                        className={`status-badge ${
-                          student.passed ? "passed" : "failed"
-                        }`}
-                      >
-                        {student.passed ? "Passed" : "Failed"}
+                      <span className={`status-badge ${student.passed?"passed":"failed"}`}>
+                        {student.passed ? "Passed":"Failed"}
                       </span>
                     </td>
                   </tr>
@@ -171,19 +143,17 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Top Performing Colleges */}
+        {/* Top Colleges */}
         <div className="content-card">
           <h2>Top Performing Colleges</h2>
           <div className="colleges-list">
-            {topColleges.map((college, index) => (
+            {topColleges.map((college,index)=>(
               <div key={index} className="college-item">
                 <div className="college-info">
                   <span className="college-initials">{college.initials}</span>
                   <div>
                     <h4>{college.name}</h4>
-                    <p>
-                      {college.candidates} candidates, {college.passed} passed
-                    </p>
+                    <p>{college.candidates} candidates, {college.passed} passed</p>
                   </div>
                 </div>
                 <div className="college-rate">{college.rate}</div>

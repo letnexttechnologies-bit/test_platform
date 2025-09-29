@@ -1,9 +1,12 @@
-.results-table{
-     padding: 20px;
+.results-table {
+  padding: 20px;
   background-color: #f5f7f9;
   min-height: 100vh;
-  margin-left: 250px;
+  margin-left: 250px; /* space for desktop sidebar */
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
+
 /* Center container for search and buttons */
 .center-container {
   display: flex;
@@ -40,7 +43,7 @@
 
 /* Export button */
 .btn-export {
-  background-color: #28a745; /* Green */
+  background-color: #28a745;
   color: white;
 }
 
@@ -50,7 +53,7 @@
 
 /* Delete All button */
 .btn-delete-all {
-  background-color: #dc3545; /* Red */
+  background-color: #dc3545;
   color: white;
 }
 
@@ -63,6 +66,8 @@
   margin-right: 5px;
   padding: 5px 10px;
   font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .btn-view {
@@ -72,4 +77,103 @@
 
 .btn-view:hover {
   background-color: #0069d9;
+}
+
+/* Table wrapper for horizontal scroll */
+.table-wrapper {
+  width: 100%;
+  
+  overflow-x: auto;
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  text-align: center;
+  align-items: center;
+}
+
+th, td {
+  padding: 12px 8px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .results-table {
+    padding: 16px;
+  }
+
+  .center-input {
+    min-width: 100px;
+  }
+
+  .center-container button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 770px) {
+  .results-table {
+    margin-left: 70px; /* full width */
+    padding: 12px;
+  }
+
+  .center-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .center-input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .center-container button {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  th, td {
+    font-size: 13px;
+  }
+
+  .action-buttons button {
+    padding: 5px 8px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .center-container {
+    gap: 6px;
+  }
+
+  .center-input {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .center-container button {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  th, td {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+
+  .action-buttons button {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
 }

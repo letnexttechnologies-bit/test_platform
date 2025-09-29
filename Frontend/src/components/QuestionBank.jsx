@@ -303,7 +303,7 @@ export default function QuestionBank() {
                     <strong>D:</strong> {q.option4}
                   </td>
                   <td>{q.correctOption.replace("option", "").toUpperCase()}</td>
-                  <td>
+                  <td className="btn-group">
                     <button className="btn-edit" onClick={() => editMCQ(q)}>
                       Edit
                     </button>
