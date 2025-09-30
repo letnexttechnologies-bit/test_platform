@@ -30,7 +30,7 @@ app.use(cookieParser());
 // -------------------- CORS FIX --------------------
 const allowedOrigins = [
   "http://localhost:5173",            // local dev
-  "https://learnnexttest.netlify.app" // production frontend
+  "https://learnnextcoding.netlify.app/" // production frontend
 ];
 
 app.use(
